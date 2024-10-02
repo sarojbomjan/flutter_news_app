@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:week1/api/get.dart';
 import 'package:week1/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -9,6 +10,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  @override
+  void initState() {
+    super.initState();
+    GetApi().getNewsApiCall();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
