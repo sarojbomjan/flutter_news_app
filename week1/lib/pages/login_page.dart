@@ -10,12 +10,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  @override
-  void initState() {
-    super.initState();
-    GetApi().getNewsApiCall();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;

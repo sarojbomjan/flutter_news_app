@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 
+import "../api/get.dart";
 import "../model/newsapi.dart";
 
 class HomePage extends StatefulWidget {
@@ -10,11 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
   // Future
   late Future<NewsApi?> futureNewsData;
-  
 
   horizontalscrollFunc(var size, var color) {
     return Container(
@@ -136,6 +134,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    futureNewsData = GetApi().getNewsApiCall();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
@@ -144,6 +148,18 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          FutureBuilder(
+            future: futureNewsData,
+            builder: (context, AsyncSnapshot<dynamic> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.active:
+                case ConnectionState.waiting:
+                case ConnectionState.done:
+                default:
+              }
+            },
+          ),
           Container(
             height: size.height / 5,
             width: size.width / 1,
