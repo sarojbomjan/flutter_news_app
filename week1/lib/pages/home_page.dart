@@ -14,12 +14,11 @@ class _HomePageState extends State<HomePage> {
   // Future
   late Future<NewsApi?> futureNewsData;
 
-  horizontalscrollFunc(var size, var color) {
+  horizontalscrollFunc(var size, Articles articledata) {
     return Container(
       width: size.width / 1.5,
       height: size.height / 5,
       decoration: BoxDecoration(
-        color: Color(color),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Stack(
@@ -29,7 +28,7 @@ class _HomePageState extends State<HomePage> {
             width: size.width / 1.5,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.asset("lib/images/food.jpeg", fit: BoxFit.cover,
+              child: Image.network(articledata.urlToImage!, fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                 return Text("Image not available");
               }),
@@ -42,7 +41,7 @@ class _HomePageState extends State<HomePage> {
               width: size.width / 2,
               decoration: BoxDecoration(color: Colors.black12),
               child: Text(
-                "Delicious food",
+                articledata.title!,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,

@@ -53,8 +53,8 @@ class Articles {
     author = json['author'];
     title = json['title'];
     description = json['description'];
-    url = json['url'];
-    urlToImage = json['urlToImage'];
+    url = json['url'] ?? "";
+    urlToImage = json['urlToImage'] ?? "";
     publishedAt = json['publishedAt'];
     content = json['content'];
   }
