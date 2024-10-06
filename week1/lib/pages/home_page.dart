@@ -68,12 +68,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  verticalscrollFunc(var size, var color) {
+  verticalscrollFunc(var size, Articles articledata) {
     return Container(
       width: size.width / 1.5,
       height: size.height / 5,
       decoration: BoxDecoration(
-        color: Color(color),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -85,8 +84,8 @@ class _HomePageState extends State<HomePage> {
             width: size.width / 2, // Adjust width for the image
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                "lib/images/food.jpeg",
+              child: Image.network(
+                articledata.urlToImage!,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Center(child: Text("Image not available"));
@@ -104,7 +103,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Content",
+                  articledata.title!,
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black),
                 ),
@@ -119,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text("Order Now"),
                     ),
                     Text(
-                      "Sep 25, 2024",
+                      articledata.publishedAt!,
                       style: TextStyle(color: Colors.black),
                     ),
                   ],
@@ -190,10 +189,11 @@ class _HomePageState extends State<HomePage> {
                               height: size.height / 1.6,
                               width: size.width / 1,
                               child: ListView.builder(
-                                itemCount: 5,
+                                itemCount: newsdata.articles!.length,
                                 scrollDirection: Axis.vertical,
                                 itemBuilder: (context, index) {
-                                  return verticalscrollFunc(size, 0xfffEDE8DC);
+                                  return verticalscrollFunc(
+                                      size, newsdata.articles![index]);
                                 },
                               ),
                             ),
