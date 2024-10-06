@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import "package:week1/pages/button_page.dart";
+import "package:week1/static.dart";
 
 import "../api/get.dart";
 import "../model/newsapi.dart";
@@ -15,55 +17,65 @@ class _HomePageState extends State<HomePage> {
   late Future<NewsApi?> futureNewsData;
 
   horizontalscrollFunc(var size, Articles articledata) {
-    return Container(
-      width: size.width / 1.5,
-      height: size.height / 5,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Stack(
-        children: [
-          Container(
-            height: size.height / 5,
-            width: size.width / 1.5,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.network(articledata.urlToImage!, fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                return Text("Image not available");
-              }),
-            ),
-          ),
-          Positioned(
-            bottom: 20,
-            left: 15,
-            child: Container(
-              width: size.width / 2,
-              decoration: BoxDecoration(color: Colors.black12),
-              child: Text(
-                articledata.title!,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+    return GestureDetector(
+      onTap: () {
+        StaticValue.newsdetail = articledata;
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const PageContent()),
+        );
+      },
+      child: Container(
+        width: size.width / 1.5,
+        height: size.height / 5,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Stack(
+          children: [
+            Container(
+              height: size.height / 5,
+              width: size.width / 1.5,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.network(articledata.urlToImage!, fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                  return Text("Image not available");
+                }),
               ),
             ),
-          ),
-          Positioned(
-            right: 5,
-            bottom: 10,
-            child: Icon(
-              Icons.play_circle,
-              size: 30,
+            Positioned(
+              bottom: 20,
+              left: 15,
+              child: Container(
+                width: size.width / 2,
+                decoration: BoxDecoration(color: Colors.black12),
+                child: Text(
+                  articledata.title!,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             ),
-          ),
-          Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-          )
-        ],
+            Positioned(
+              right: 5,
+              bottom: 10,
+              child: Icon(
+                Icons.play_circle,
+                size: 30,
+              ),
+            ),
+            Container(
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(12)),
+            )
+          ],
+        ),
       ),
     );
   }

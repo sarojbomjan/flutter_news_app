@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:week1/static.dart';
 
 class PageContent extends StatefulWidget {
   const PageContent({super.key});
@@ -30,8 +31,8 @@ class _PageContentState extends State<PageContent> {
                     width: size.width,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        "lib/images/food.jpeg",
+                      child: Image.network(
+                        StaticValue.newsdetail!.urlToImage!,
                         fit: BoxFit.contain,
                         errorBuilder: (context, error, stackTrace) {
                           return Text("Image not available");
@@ -40,10 +41,18 @@ class _PageContentState extends State<PageContent> {
                     ),
                   ),
 
+                  Positioned(
+                    child: Text(
+                      StaticValue.newsdetail!.title!,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+
                   // Share button
                   Positioned(
                     right: 30,
-                    top: 40,
+                    top: 30,
                     child: Icon(
                       Icons.share,
                       size: 20,
