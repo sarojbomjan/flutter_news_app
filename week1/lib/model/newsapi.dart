@@ -1,3 +1,5 @@
+import 'package:week1/static.dart';
+
 class NewsApi {
   String? status;
   int? totalResults;
@@ -53,8 +55,8 @@ class Articles {
     author = json['author'];
     title = json['title'];
     description = json['description'];
-    url = json['url'] ?? "";
-    urlToImage = json['urlToImage'] ?? "";
+    url = json['url'] ?? StaticValue.imgurl;
+    urlToImage = json['urlToImage'] ?? StaticValue.imgurl;
     publishedAt = json['publishedAt'];
     content = json['content'];
   }

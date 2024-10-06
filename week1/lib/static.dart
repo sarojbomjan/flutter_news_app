@@ -6,6 +6,8 @@ class StaticValue {
   //api key
   static String apiKey = "a25a0c0b883c4f389ff5c23da0f9dfea";
 
+  static String imgurl = "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600";
+
   static String dummydata = '''
   {
   "status": "ok",
