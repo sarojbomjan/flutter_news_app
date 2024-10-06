@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import "../model/newsapi.dart";
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -8,6 +10,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+
+  // Future
+  late Future<NewsApi?> futureNewsData;
+  
+
   horizontalscrollFunc(var size, var color) {
     return Container(
       width: size.width / 1.5,
