@@ -153,37 +153,70 @@ class _HomePageState extends State<HomePage> {
             builder: (context, AsyncSnapshot<dynamic> snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
+                  //network, server error
+                  return Container(
+                      height: size.height,
+                      width: size.width,
+                      child: Center(
+                        child: Text("Server error"),
+                      ));
+
                 case ConnectionState.active:
+                  return const CircularProgressIndicator();
+
                 case ConnectionState.waiting:
+                  return const CircularProgressIndicator();
+
                 case ConnectionState.done:
+                  NewsApi newsdata = snapshot.data;
+                  return (snapshot.data != null || snapshot.hasData)
+                      ? Column(
+                          children: [
+                            Container(
+                              height: size.height / 5,
+                              width: size.width / 1,
+                              child: ListView.builder(
+                                itemCount: newsdata.articles!.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return horizontalscrollFunc(
+                                      size, newsdata.articles![index]);
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 50,
+                            ),
+                            Container(
+                              height: size.height / 1.6,
+                              width: size.width / 1,
+                              child: ListView.builder(
+                                itemCount: 5,
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, index) {
+                                  return verticalscrollFunc(size, 0xfffEDE8DC);
+                                },
+                              ),
+                            ),
+                          ],
+                        )
+                      : Container(
+                          height: size.height,
+                          width: size.width,
+                          child: const Center(
+                            child: Text("No data available"),
+                          ),
+                        );
+
                 default:
+                  return Container(
+                      height: size.height,
+                      width: size.width,
+                      child: Center(
+                        child: Text("Server error"),
+                      ));
               }
             },
-          ),
-          Container(
-            height: size.height / 5,
-            width: size.width / 1,
-            child: ListView.builder(
-              itemCount: 5,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return horizontalscrollFunc(size, 0xfffEDE8DC);
-              },
-            ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Container(
-            height: size.height / 1.6,
-            width: size.width / 1,
-            child: ListView.builder(
-              itemCount: 5,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                return verticalscrollFunc(size, 0xfffEDE8DC);
-              },
-            ),
           ),
         ],
       ),
