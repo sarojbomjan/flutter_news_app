@@ -5,7 +5,7 @@ class StaticValue {
   //datatime converter function
   static String dateTimeConverter(String datetimeutc) {
     // format string
-    DateTime parseDate = DateFormat("yyyy-MM--dd").parse(datetimeutc);
+    DateTime parseDate = DateFormat("yyyy-MM-dd").parse(datetimeutc);
     var inputDate = DateTime.parse(parseDate.toString());
 
     // output format

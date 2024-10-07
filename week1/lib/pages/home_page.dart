@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text("Order Now"),
                     ),
                     Text(
-                      articledata.publishedAt!,
+                      StaticValue.dateTimeConverter(articledata.publishedAt!),
                       style: TextStyle(color: Colors.black),
                     ),
                   ],
