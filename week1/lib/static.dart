@@ -1,6 +1,21 @@
+import 'package:intl/intl.dart';
 import 'package:week1/model/newsapi.dart';
 
 class StaticValue {
+  //datatime converter function
+  static String dateTimeConverter(String datetimeutc) {
+    // format string
+    DateTime parseDate = DateFormat("yyyy-MM--dd").parse(datetimeutc);
+    var inputDate = DateTime.parse(parseDate.toString());
+
+    // output format
+    DateFormat output = DateFormat("d MMM,yyy");
+    var dateTime = output.format(inputDate);
+
+    // return string
+    return dateTime.toString();
+  }
+
   //static global
   //endpoint baseURL
   static String baseURL = "newsapi.org";
@@ -14,6 +29,7 @@ class StaticValue {
   static Articles? newsdetail = null;
 
   static String dummydata = '''
+
   {
   "status": "ok",
   "totalResults": 8099,
