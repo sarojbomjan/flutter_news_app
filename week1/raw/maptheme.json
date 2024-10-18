@@ -55,10 +55,22 @@
         "elementType": "geometry.fill",
         "stylers": [
             {
-                "color": "#cc5d5d"
+                "color": "#7c5b5b"
             },
             {
                 "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#eefaf3"
             }
         ]
     },
