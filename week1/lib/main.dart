@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:week1/pages/button_page.dart";
 import "package:week1/pages/forgot_password.dart";
 import "package:week1/pages/login_page.dart";
+import "package:week1/pages/mapclass.dart";
 import "package:week1/pages/register.dart";
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: MapSample(),
       routes: {
         '/forgotpassword': (context) => ForgotPassword(),
         "/signup": (context) => RegistrationPage(),

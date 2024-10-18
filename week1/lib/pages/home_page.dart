@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         width: size.width / 1.5,
         height: size.height / 5,
+        margin: const EdgeInsets.only(left: 5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
         ),
@@ -81,64 +82,72 @@ class _HomePageState extends State<HomePage> {
   }
 
   verticalscrollFunc(var size, Articles articledata) {
-    return Container(
-      width: size.width / 1.5,
-      height: size.height / 5,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Image Section
-          Container(
-            height: size.height / 5, // Adjust height for proportionality
-            width: size.width / 2, // Adjust width for the image
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.network(
-                articledata.urlToImage!,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Center(child: Text("Image not available"));
-                },
+    return GestureDetector(
+      onTap: () {
+        StaticValue.newsdetail = articledata;
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const PageContent()));
+      },
+      child: Container(
+        width: size.width / 1.5,
+        height: size.height / 5,
+        margin: const EdgeInsets.only(bottom: 7),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Image Section
+            Container(
+              height: size.height / 5, // Adjust height for proportionality
+              width: size.width / 2, // Adjust width for the image
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.network(
+                  articledata.urlToImage!,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Center(child: Text("Image not available"));
+                  },
+                ),
               ),
             ),
-          ),
 
-          SizedBox(width: 10),
+            SizedBox(width: 10),
 
-          // Content Section
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  articledata.title!,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/pagecontent");
-                      },
-                      child: Text("Order Now"),
-                    ),
-                    Text(
-                      StaticValue.dateTimeConverter(articledata.publishedAt!),
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ],
-                ),
-              ],
+            // Content Section
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    articledata.title!,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black),
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/pagecontent");
+                        },
+                        child: Text("Order Now"),
+                      ),
+                      Text(
+                        StaticValue.dateTimeConverter(articledata.publishedAt!),
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -165,11 +174,12 @@ class _HomePageState extends State<HomePage> {
                 case ConnectionState.none:
                   //network, server error
                   return Container(
-                      height: size.height,
-                      width: size.width,
-                      child: Center(
-                        child: Text("Server error"),
-                      ));
+                    height: size.height,
+                    width: size.width,
+                    child: Center(
+                      child: Text("Server error"),
+                    ),
+                  );
 
                 case ConnectionState.active:
                   return const CircularProgressIndicator();
