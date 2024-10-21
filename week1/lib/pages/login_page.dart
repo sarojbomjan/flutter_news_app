@@ -1,5 +1,10 @@
+import 'package:esewa_flutter_sdk/esewa_config.dart';
+import 'package:esewa_flutter_sdk/esewa_flutter_sdk.dart';
+import 'package:esewa_flutter_sdk/esewa_payment.dart';
+import 'package:esewa_flutter_sdk/esewa_payment_success_result.dart';
 import 'package:flutter/material.dart';
 import 'package:week1/pages/home_page.dart';
+import 'package:week1/static.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -9,6 +14,35 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  esewapayment() {
+    try {
+      EsewaFlutterSdk.initPayment(
+        esewaConfig: EsewaConfig(
+          environment: Environment.test,
+          clientId: StaticValue.CLIENT_ID,
+          secretId: StaticValue.SECRET_KEY,
+        ),
+        esewaPayment: EsewaPayment(
+          productId: "1d71jd81",
+          productName: "Product One",
+          productPrice: "20",
+          callbackUrl: '',
+        ),
+        onPaymentSuccess: (EsewaPaymentSuccessResult data) {
+          debugPrint(":::SUCCESS::: => $data");
+        },
+        onPaymentFailure: (data) {
+          debugPrint(":::FAILURE::: => $data");
+        },
+        onPaymentCancellation: (data) {
+          debugPrint(":::CANCELLATION::: => $data");
+        },
+      );
+    } on Exception catch (e) {
+      debugPrint("EXCEPTION : ${e.toString()}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -91,14 +125,18 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 20,
                   ),
+
+                  //Sign In
                   SizedBox(
                     width: 200,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
-                        );
+                        esewapayment();
+
+                        // Navigator.push(
+                        // context,
+                        //MaterialPageRoute(builder: (context) => HomePage()),
+                        //);
                       },
                       style: ButtonStyle(
                         backgroundColor:

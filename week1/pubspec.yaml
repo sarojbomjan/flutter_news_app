@@ -38,6 +38,8 @@ dependencies:
   http: ^1.2.2
   intl: ^0.19.0
   google_maps_flutter: ^2.9.0
+  esewa_flutter_sdk:
+    path: ./esewa_sdk/esewa_flutter_sdk
 
 dev_dependencies:
   flutter_test:
